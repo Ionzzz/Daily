@@ -1,0 +1,6 @@
+- **DOM 和 BOM**
+    + **D**ocument **O**bject **M**odel 文档对象模型，就是把【文档】当做一个【对象】来看待。--document 对象
+        + 各个组件（component）可以通过object.attribute访问
+        + 一个DOM有一个根对象，这个对象通常是document
+    + **B**rower **O**bject **M**odel 浏览器对象模型，就是把【浏览器】当做一个【对象】来看待。--window 对象
+        + BOM除了可以访问文档中的组件之外，还可以访问浏览器组件，比如 navigator（导航条）、history（历史记录）等等
