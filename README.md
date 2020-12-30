@@ -7,6 +7,7 @@
 - <https://element.eleme.cn/#/zh-CN>
 #。 NodeJs:
 - Node入门: <https://www.nodebeginner.org/index-zh-cn.html>
+- 视频：https://www.bilibili.com/video/BV1Ns411N7HU
 - cnode: <https://cnodejs.org/>
 #. Ecmascript6:
 - <https://es6.ruanyifeng.com/>
