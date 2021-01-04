@@ -31,3 +31,8 @@
         + 代码复杂度， js动画代码相对复杂一些
         + 动画运行时，对动画的控制程度上， css不能添加事件，js可以
         + 动画性能上，js动画多了一个js解析过程，性能不如css动画好
+- 事件冒泡
+    + 当一个元素收到事件(仅仅指事件event)的时候 会把他接收到的事件传给自己的父级，一直到window。
+    + 取消事件冒泡的两种方式： 
+        - 标准的W3C 方式：e.stopPropagation();这里的stopPropagation是标准的事件对象的一个方法，调用即可 
+        - 非标准的IE方式:ev.cancelBubble=true;  这里的cancelBubble是 IE事件对象的属性，设为true就可以了
