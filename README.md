@@ -1,5 +1,5 @@
 ## Daily
-​	   #. uniapp: 
+#. uniapp: 
 - 官网： <https://uniapp.dcloud.io/>
 
 - 教程： <https://www.jianshu.com/p/132a3de98238?utm_campaign=maleskine>
@@ -15,7 +15,7 @@
 
 - Node入门: <https://www.nodebeginner.org/index-zh-cn.html>
 
-- 视频：https://www.bilibili.com/video/BV1Ns411N7HU
+- 视频：<https://www.bilibili.com/video/BV1Ns411N7HU>
 
 - cnode: <https://cnodejs.org/>
  
