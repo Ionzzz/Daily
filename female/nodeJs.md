@@ -26,3 +26,5 @@
 - Express Web
 - Ecmascript6
     + <https://es6.ruanyifeng.com/>
+- Node.js中环境变量process.env详解
+    + process对象是一个global全局变量，提供有关信息，控制当前Node.js进程。作为一个对象，它对于Node.js应用程序始终是可用的，无需使用require()。
