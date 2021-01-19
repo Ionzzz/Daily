@@ -1,6 +1,44 @@
 #ES6
-- let const
-- 数值扩展
+- **let const**
+- **正则扩展**
+    + RegExp 构造函数
+- **Symbol**
+    + ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+    + 注意，Symbol函数前不能使用new命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。也就是说，由于 Symbol 值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型。
+- **Set和Map数据结构**
+    + ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+    + WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。 首先，WeakSet 的成员只能是对象，而不能是其他类型的值。
+    ```javascript
+    const s = new Set();
+    [2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
+    for (let i of s) {
+    console.log(i);
+    }
+    // 2 3 5 4
+    ```
+    + Map类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。
+    ```javascript
+    const m = new Map();
+    const o = {p: 'Hello World'};
+    m.set(o, 'content')
+    m.get(o) // "content"
+    m.has(o) // true
+    m.delete(o) // true
+    m.has(o) // false
+    const map = new Map([
+    ['name', '张三'],
+    ['title', 'Author']
+    ]);
+    map.size // 2
+    map.has('name') // true
+    map.get('name') // "张三"
+    map.has('title') // true
+    map.get('title') // "Author"
+    ```
+- **Proxy**
+    + Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。
+    + Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。
+- **数值扩展**
     + ES6 提供了二进制和八进制数值的新的写法，分别用前缀0b（或0B）和0o（或0O）表示。
         ```javascript
         0b111110111 === 503 // true
@@ -75,4 +113,26 @@
         Math.sign(0) // +0
         Math.sign(-0) // -0
         Math.sign(NaN) // NaN
+        ```
+    + Math.cbrt() 用于计算一个数的立方根。
+    + Math.clz32() 方法将参数转为 32 位无符号整数的形式，然后返回这个 32 位值里面有多少个前导 0。
+    + Math.imul() 方法返回两个数以 32 位带符号整数形式相乘的结果，返回的也是一个 32 位的带符号整数。
+    + Math.fround() 返回一个数的32位单精度浮点数形式。Math.hypot()方法返回所有参数的平方和的平方根。
+    + Math.expm1()、Math.log1p()、Math.log10()、Math.log2()
+    + Math.sinh(x)、Math.cosh(x)、Math.tanh(x)
+    + **指数运算符** ES2016 新增了一个指数运算符（**）。这个运算符的一个特点是右结合，而不是常见的左结合。多个指数运算符连用时，是从最右边开始计算的。
+        ```javascript
+        2 ** 2 // 4
+        2 ** 3 // 8
+        // 相当于 2 ** (3 ** 2)
+        2 ** 3 ** 2 // 512
+        ```
+    + 引入BigInt类型。没有位数的限制，任何位数的整数都可以精确表示。
+        ```javascript
+        const a = 2172141653n;
+        const b = 15346349309n;
+        // BigInt 可以保持精度
+        a * b // 33334444555566667777n
+        // 普通整数无法保持精度
+        Number(a) * Number(b) // 33334444555566670000
         ```
