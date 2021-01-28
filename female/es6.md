@@ -8,33 +8,7 @@
 - **Set和Map数据结构**
     + ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
     + WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。 首先，WeakSet 的成员只能是对象，而不能是其他类型的值。
-    ```javascript
-    const s = new Set();
-    [2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
-    for (let i of s) {
-    console.log(i);
-    }
-    // 2 3 5 4
-    ```
     + Map类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。
-    ```javascript
-    const m = new Map();
-    const o = {p: 'Hello World'};
-    m.set(o, 'content')
-    m.get(o) // "content"
-    m.has(o) // true
-    m.delete(o) // true
-    m.has(o) // false
-    const map = new Map([
-    ['name', '张三'],
-    ['title', 'Author']
-    ]);
-    map.size // 2
-    map.has('name') // true
-    map.get('name') // "张三"
-    map.has('title') // true
-    map.get('title') // "Author"
-    ```
 - **Proxy**
     + Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。
     + Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。
@@ -46,82 +20,19 @@
 - **Module**
     + ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。比如，CommonJS 模块就是对象，输入时必须查找对象属性。
     + ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";
+- **同步遍历器**
+- **异步遍历器**
 - **数值扩展**
     + ES6 提供了二进制和八进制数值的新的写法，分别用前缀0b（或0B）和0o（或0O）表示。
-        ```javascript
-        0b111110111 === 503 // true
-        0o767 === 503 // true
-        Number('0b111')  // 7
-        Number('0o10')  // 8
-        ```
     + Number.isFinite()用来检查一个数值是否为有限的（finite）,Number.isNaN()用来检查一个值是否为NaN
-        ```javascript
-        Number.isFinite(15); // true
-        Number.isFinite(0.8); // true
-        Number.isFinite(NaN); // false
-        Number.isFinite(Infinity); // false
-        Number.isFinite(-Infinity); // false
-        Number.isFinite('foo'); // false
-        Number.isFinite('15'); // false
-        Number.isFinite(true); // false
-        Number.isNaN(NaN) // true
-        Number.isNaN(15) // false
-        Number.isNaN('15') // false
-        Number.isNaN(true) // false
-        Number.isNaN(9/NaN) // true
-        Number.isNaN('true' / 0) // true
-        Number.isNaN('true' / 'true') // true
-        ```
         + 传统方法先调用Number()将非数值的值转为数值，再进行判断，而这两个新方法只对数值有效，Number.isFinite()对于非数值一律返回false, Number.isNaN()只有对于NaN才返回true，非NaN一律返回false。
-          ```javascript
-            isFinite(25) // true
-            isFinite("25") // true
-            Number.isFinite(25) // true
-            Number.isFinite("25") // false
-            
-            isNaN(NaN) // true
-            isNaN("NaN") // true
-            Number.isNaN(NaN) // true
-            Number.isNaN("NaN") // false
-            Number.isNaN(1) // false
-          ```
     + Number.parseInt(), Number.parseFloat() ES6 将全局方法parseInt()和parseFloat()，移植到Number对象上面，行为完全保持不变。这样做的目的，是逐步减少全局性方法，使得语言逐步模块化
     + Number.isInteger() 用来判断一个数值是否为整数。
     + Number.EPSILON ES6 在Number对象上面，新增一个极小的常量Number.EPSILON。根据规格，它表示 1 与大于 1 的最小浮点数之间的差。
         + Number.EPSILON实际上是 JavaScript 能够表示的最小精度。误差如果小于这个值，就可以认为已经没有意义了，即不存在误差了。 引入一个这么小的量的目的，在于为浮点数计算，设置一个误差范围。我们知道浮点数计算是不精确的。
-        ```javascript
-        Number.EPSILON === Math.pow(2, -52)
-        // true
-        Number.EPSILON
-        // 2.220446049250313e-16
-        Number.EPSILON.toFixed(20)
-        // "0.00000000000000022204"
-        function withinErrorMargin (left, right) {
-        return Math.abs(left - right) < Number.EPSILON * Math.pow(2, 2);
-        }
-        0.1 + 0.2 === 0.3 // false
-        withinErrorMargin(0.1 + 0.2, 0.3) // true
-        1.1 + 1.3 === 2.4 // false
-        withinErrorMargin(1.1 + 1.3, 2.4) // true
-        ```
     + 安全整数和 Number.isSafeInteger() 能够准确表示的整数范围在-2^53到2^53之间（不含两个端点），超过这个范围，无法精确表示这个值。ES6 引入了Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER这两个常量，用来表示这个范围的上下限。
     + Math.trunc() 方法用于去除一个数的小数部分，返回整数部分。对于非数值，Math.trunc内部使用Number方法将其先转为数值。对于空值和无法截取整数的值，返回NaN。
-        ```javascript
-        Math.trunc(4.1) // 4
-        Math.trunc('123.456') // 123
-        Math.trunc(NaN);      // NaN
-        Math.trunc('foo');    // NaN
-        Math.trunc();         // NaN
-        Math.trunc(undefined) // NaN
-        ```
     + Math.sign() 方法用来判断一个数到底是正数、负数、还是零。对于非数值，会先将其转换为数值。
-        ```javascript
-        Math.sign(-5) // -1
-        Math.sign(5) // +1
-        Math.sign(0) // +0
-        Math.sign(-0) // -0
-        Math.sign(NaN) // NaN
-        ```
     + Math.cbrt() 用于计算一个数的立方根。
     + Math.clz32() 方法将参数转为 32 位无符号整数的形式，然后返回这个 32 位值里面有多少个前导 0。
     + Math.imul() 方法返回两个数以 32 位带符号整数形式相乘的结果，返回的也是一个 32 位的带符号整数。
@@ -129,18 +40,4 @@
     + Math.expm1()、Math.log1p()、Math.log10()、Math.log2()
     + Math.sinh(x)、Math.cosh(x)、Math.tanh(x)
     + **指数运算符** ES2016 新增了一个指数运算符（**）。这个运算符的一个特点是右结合，而不是常见的左结合。多个指数运算符连用时，是从最右边开始计算的。
-        ```javascript
-        2 ** 2 // 4
-        2 ** 3 // 8
-        // 相当于 2 ** (3 ** 2)
-        2 ** 3 ** 2 // 512
-        ```
     + 引入BigInt类型。没有位数的限制，任何位数的整数都可以精确表示。
-        ```javascript
-        const a = 2172141653n;
-        const b = 15346349309n;
-        // BigInt 可以保持精度
-        a * b // 33334444555566667777n
-        // 普通整数无法保持精度
-        Number(a) * Number(b) // 33334444555566670000
-        ```
